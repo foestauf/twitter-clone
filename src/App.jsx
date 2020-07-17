@@ -9,7 +9,7 @@ import * as firebase from 'firebase/app';
 import { createFirestoreInstance, firestoreReducer } from 'redux-firestore';
 import { configureStore } from '@reduxjs/toolkit';
 import todosSlice from './features/todo/todoSlice';
-import { Home } from './features/todo/todos';
+import { Home } from './Home';
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,

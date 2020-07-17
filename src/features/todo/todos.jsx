@@ -2,7 +2,6 @@ import { useSelector } from 'react-redux';
 import { isEmpty, isLoaded, useFirestoreConnect } from 'react-redux-firebase';
 import React from 'react';
 import TodoItem from './TodoItem';
-import NewTodo from './NewTodo';
 
 const todosQuery = {
   collection: 'todos',
@@ -25,14 +24,4 @@ function Todos() {
   return todos.map(({ id, ...todo }, ind) => <TodoItem key={`${id}-${ind}`} id={id} {...todo} />);
 }
 
-export const Home = () => {
-  return (
-    <div id="home">
-      Firestore demo
-      <Todos />
-      <NewTodo />
-    </div>
-  );
-};
-
-export default Home;
+export default Todos;
