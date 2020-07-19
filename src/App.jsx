@@ -4,12 +4,14 @@ import 'firebase/auth';
 import 'firebase/database';
 import 'firebase/firestore';
 import { Provider } from 'react-redux';
-import { firebaseReducer, ReactReduxFirebaseProvider } from 'react-redux-firebase';
+import { actionTypes, firebaseReducer, ReactReduxFirebaseProvider } from 'react-redux-firebase';
 import * as firebase from 'firebase/app';
 import { createFirestoreInstance, firestoreReducer } from 'redux-firestore';
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 import todosSlice from './features/todo/todoSlice';
 import { Home } from './Home';
+
+const firebaseui = require('firebaseui');
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -24,6 +26,23 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 export const { auth } = firebase;
 export const db = firebase.database;
+export const ui = new firebaseui.auth.AuthUI(firebase.auth());
+
+export const uiConfig = {
+  signInFlow: 'popup',
+  signInOptions: [firebase.auth.EmailAuthProvider.PROVIDER_ID],
+  credentialHelper: 'none',
+  callbacks: {
+    signInSuccessWithAuthResult: () => {
+      auth()
+        .setPersistence(auth.Auth.Persistence.SESSION)
+        .then(() => {
+          console.log('Storing session token');
+        });
+      return false;
+    },
+  },
+};
 
 const store = configureStore({
   reducer: {
@@ -31,6 +50,11 @@ const store = configureStore({
     firebase: firebaseReducer,
     firestore: firestoreReducer,
   },
+  middleware: getDefaultMiddleware({
+    serializableCheck: {
+      ignoredActions: [actionTypes.LOGIN],
+    },
+  }),
 });
 const rrfConfig = {
   userProfile: 'users',

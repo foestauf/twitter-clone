@@ -4,7 +4,6 @@ import TweetCard from './TweetCard';
 const TweetFeed = () => {
   return (
     <div>
-      Tweet Feed
       <TweetCard />
     </div>
   );

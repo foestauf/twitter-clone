@@ -14,6 +14,7 @@ import { faEllipsisV } from '@fortawesome/pro-regular-svg-icons/faEllipsisV';
 import Avatar from '@material-ui/core/Avatar';
 import React from 'react';
 import makeStyles from '@material-ui/core/styles/makeStyles';
+import Grid from '@material-ui/core/Grid';
 
 const useStyles = makeStyles({
   box: {
@@ -101,10 +102,14 @@ const NavMenu = () => {
         <Button className={classes.button}>Tweet</Button>
 
         <Button className={classes.button}>
-          <div className={classes.iconContainer}>
-            <Avatar>OP</Avatar>
-            <span>User Name</span>
-          </div>
+          <Grid container spacing={3} style={{ display: 'flex' }}>
+            <Grid item xs={1} className={classes.iconContainer} style={{ width: 'min-content' }}>
+              <Avatar>OP</Avatar>
+            </Grid>
+            <Grid item xs={10}>
+              <span>User Name</span>
+            </Grid>
+          </Grid>
         </Button>
       </Container>
     </Paper>

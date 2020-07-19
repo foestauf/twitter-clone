@@ -8,10 +8,13 @@ import InputLabel from '@material-ui/core/InputLabel';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import { faSearch } from '@fortawesome/pro-regular-svg-icons/faSearch';
 import IconButton from '@material-ui/core/IconButton';
+import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 import NavMenu from './features/NavMenu/NavMenu';
 import TweetFeed from './features/TweetFeed/TweetFeed';
+import NewTweet from './features/TweetFeed/NewTweet';
+import SignOn from './features/SignOn/SignOn';
 
 const useStyles = makeStyles({
   container: {
@@ -30,20 +33,25 @@ export const Home = () => {
         justify="center"
         alignItems="stretch"
       >
-        <Grid item xs="2">
+        <Grid item xs={2}>
           <NavMenu />
         </Grid>
-        <Grid item xs="4">
+        <Grid item xs={4}>
           <Paper>
             <Container>
-              <div style={{ position: 'sticky' }}>Home Area</div>
+              <div style={{ position: 'sticky' }}>
+                <Button>
+                  <h2>Home</h2>
+                </Button>
+              </div>
+              <NewTweet />
               <TweetFeed />
             </Container>
           </Paper>
         </Grid>
-        <Grid item xs="2">
+        <Grid item xs={2}>
           <Paper>
-            <Container>
+            <Container style={{ padding: '0.5em' }}>
               <FormControl style={{ width: '100%' }} variant="outlined">
                 <InputLabel>Search</InputLabel>
                 <OutlinedInput
@@ -58,6 +66,7 @@ export const Home = () => {
                 />
               </FormControl>
             </Container>
+            <SignOn />
           </Paper>
         </Grid>
       </Grid>
