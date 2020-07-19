@@ -1,6 +1,7 @@
 import Paper from '@material-ui/core/Paper';
 import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
+import { Link as RouterLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTwitter } from '@fortawesome/free-brands-svg-icons/faTwitter';
 import { faHomeHeart } from '@fortawesome/pro-regular-svg-icons/faHomeHeart';
@@ -29,6 +30,8 @@ const useStyles = makeStyles({
   iconContainer: {
     width: '3em',
     paddingRight: '0.5em',
+    justifyContent: 'center',
+    display: 'flex',
   },
   profile: {
     position: 'absolute',
@@ -50,79 +53,22 @@ const NavMenu = () => {
     <Paper style={{ position: 'sticky' }} className={classes.box}>
       <Grid container direction="column" spacing={2}>
         <Container>
-          <Grid item xs={1}>
-            <Button className={classes.button}>
-              <div className={classes.iconContainer}>
-                <FontAwesomeIcon className={classes.icon} icon={faTwitter} size="2x" />
-              </div>
-            </Button>
-          </Grid>
+          <NavButton to="/" title="" icon={faTwitter} size="1" />
+          <NavButton to="/" title="Home" icon={faHomeHeart} />
+          <NavButton to="/" title="Explore" icon={faHashtag} />
+          <NavButton to="/" title="Notifications" icon={faBell} />
+          <NavButton to="/" title="Messages" icon={faEnvelope} />
+          <NavButton to="/" title="Bookmarks" icon={faBookmark} />
+          <NavButton to="/" title="Lists" icon={faFileAlt} />
+          <NavButton to="/profile" title="Profile" icon={faUserCircle} />
+          <NavButton to="/" title="More" icon={faEllipsisV} />
           <Grid item>
-            <Button className={classes.button}>
-              <div className={classes.iconContainer}>
-                <FontAwesomeIcon className={classes.icon} icon={faHomeHeart} size="2x" />
-              </div>
-              Home
-            </Button>
-          </Grid>
-          <Grid item>
-            <Button className={classes.button}>
-              <div className={classes.iconContainer}>
-                <FontAwesomeIcon className={classes.icon} icon={faHashtag} size="2x" />
-              </div>
-              Explore
-            </Button>
-          </Grid>
-          <Grid item>
-            <Button className={classes.button}>
-              <div className={classes.iconContainer}>
-                <FontAwesomeIcon className={classes.icon} icon={faBell} size="2x" />
-              </div>
-              Notifications
-            </Button>
-          </Grid>
-          <Grid item>
-            <Button className={classes.button}>
-              <div className={classes.iconContainer}>
-                <FontAwesomeIcon className={classes.icon} icon={faEnvelope} size="2x" />
-              </div>
-              Messages
-            </Button>
-          </Grid>
-          <Grid item>
-            <Button className={classes.button}>
-              <div className={classes.iconContainer}>
-                <FontAwesomeIcon className={classes.icon} icon={faBookmark} size="2x" />
-              </div>
-              Bookmarks
-            </Button>
-          </Grid>
-          <Grid item>
-            <Button className={classes.button}>
-              <div className={classes.iconContainer}>
-                <FontAwesomeIcon className={classes.icon} icon={faFileAlt} size="2x" />
-              </div>
-              Lists
-            </Button>
-          </Grid>
-          <Grid item>
-            <Button className={classes.button}>
-              <div className={classes.iconContainer}>
-                <FontAwesomeIcon className={classes.icon} icon={faUserCircle} size="2x" />
-              </div>
-              Profile
-            </Button>
-          </Grid>
-          <Grid item>
-            <Button className={classes.button}>
-              <div className={classes.iconContainer}>
-                <FontAwesomeIcon className={classes.icon} icon={faEllipsisV} size="2x" />
-              </div>
-              More
-            </Button>
-          </Grid>
-          <Grid item>
-            <Button className={classes.button} style={{ justifyContent: 'center' }}>
+            <Button
+              variant="contained"
+              color="primary"
+              className={classes.button}
+              style={{ justifyContent: 'center' }}
+            >
               Tweet
             </Button>
           </Grid>
@@ -139,6 +85,21 @@ const NavMenu = () => {
         </Container>
       </Grid>
     </Paper>
+  );
+};
+
+const NavButton = (props) => {
+  const { to, title, size, icon } = props;
+  const classes = useStyles();
+  return (
+    <Grid item size={size}>
+      <Button className={classes.button} component={RouterLink} to={to}>
+        <div className={classes.iconContainer}>
+          <FontAwesomeIcon icon={icon} className={classes.icon} size="2x" />
+        </div>
+        {title}
+      </Button>
+    </Grid>
   );
 };
 
