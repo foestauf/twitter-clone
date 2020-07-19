@@ -10,16 +10,17 @@ const TweetCard = () => {
       <Grid
         container
         spacing={2}
-        style={{ display: 'flex', flexDirection: 'column', width: 'min-content' }}
+        direction="column"
+        style={{ width: 'min-content', padding: '0.5em' }}
       >
         <Grid item xs={1}>
           <Avatar>OP</Avatar>
         </Grid>
       </Grid>
-      <Grid item xs={10} style={{ display: 'flex', flexDirection: 'column' }}>
+      <Grid item container direction="column" xs={10} spacing={1}>
         <Grid item>TWEETER INFO</Grid>
         <Grid item>Main Content Window</Grid>
-        <Grid item>
+        <Grid item container justify="center">
           <Button>Comment</Button>
           <Button>Retweet</Button>
           <Button>Like</Button>

@@ -28,7 +28,7 @@ const useStyles = makeStyles({
   },
   iconContainer: {
     width: '3em',
-    padding: '0.5em',
+    paddingRight: '0.5em',
   },
   profile: {
     position: 'absolute',
@@ -39,79 +39,105 @@ const useStyles = makeStyles({
     width: '100%',
     justifyContent: 'flex-start',
   },
+  avatar: {
+    padding: '0.5em',
+  },
 });
 
 const NavMenu = () => {
   const classes = useStyles();
   return (
     <Paper style={{ position: 'sticky' }} className={classes.box}>
-      <Container>
-        <Button className={classes.button}>
-          <div className={classes.iconContainer}>
-            <FontAwesomeIcon className={classes.icon} icon={faTwitter} size="2x" />
-          </div>
-        </Button>
-        <Button className={classes.button}>
-          <div className={classes.iconContainer}>
-            <FontAwesomeIcon className={classes.icon} icon={faHomeHeart} size="2x" />
-          </div>
-          Home
-        </Button>
-        <Button className={classes.button}>
-          <div className={classes.iconContainer}>
-            <FontAwesomeIcon className={classes.icon} icon={faHashtag} size="2x" />
-          </div>
-          Explore
-        </Button>
-        <Button className={classes.button}>
-          <div className={classes.iconContainer}>
-            <FontAwesomeIcon className={classes.icon} icon={faBell} size="2x" />
-          </div>
-          Notifications
-        </Button>
-        <Button className={classes.button}>
-          <div className={classes.iconContainer}>
-            <FontAwesomeIcon className={classes.icon} icon={faEnvelope} size="2x" />
-          </div>
-          Messages
-        </Button>
-        <Button className={classes.button}>
-          <div className={classes.iconContainer}>
-            <FontAwesomeIcon className={classes.icon} icon={faBookmark} size="2x" />
-          </div>
-          Bookmarks
-        </Button>
-        <Button className={classes.button}>
-          <div className={classes.iconContainer}>
-            <FontAwesomeIcon className={classes.icon} icon={faFileAlt} size="2x" />
-          </div>
-          Lists
-        </Button>
-        <Button className={classes.button}>
-          <div className={classes.iconContainer}>
-            <FontAwesomeIcon className={classes.icon} icon={faUserCircle} size="2x" />
-          </div>
-          Profile
-        </Button>
-        <Button className={classes.button}>
-          <div className={classes.iconContainer}>
-            <FontAwesomeIcon className={classes.icon} icon={faEllipsisV} size="2x" />
-          </div>
-          More
-        </Button>
-        <Button className={classes.button}>Tweet</Button>
-
-        <Button className={classes.button}>
-          <Grid container spacing={3} style={{ display: 'flex' }}>
-            <Grid item xs={1} className={classes.iconContainer} style={{ width: 'min-content' }}>
-              <Avatar>OP</Avatar>
-            </Grid>
-            <Grid item xs={10}>
-              <span>User Name</span>
-            </Grid>
+      <Grid container direction="column" spacing={2}>
+        <Container>
+          <Grid item xs={1}>
+            <Button className={classes.button}>
+              <div className={classes.iconContainer}>
+                <FontAwesomeIcon className={classes.icon} icon={faTwitter} size="2x" />
+              </div>
+            </Button>
           </Grid>
-        </Button>
-      </Container>
+          <Grid item>
+            <Button className={classes.button}>
+              <div className={classes.iconContainer}>
+                <FontAwesomeIcon className={classes.icon} icon={faHomeHeart} size="2x" />
+              </div>
+              Home
+            </Button>
+          </Grid>
+          <Grid item>
+            <Button className={classes.button}>
+              <div className={classes.iconContainer}>
+                <FontAwesomeIcon className={classes.icon} icon={faHashtag} size="2x" />
+              </div>
+              Explore
+            </Button>
+          </Grid>
+          <Grid item>
+            <Button className={classes.button}>
+              <div className={classes.iconContainer}>
+                <FontAwesomeIcon className={classes.icon} icon={faBell} size="2x" />
+              </div>
+              Notifications
+            </Button>
+          </Grid>
+          <Grid item>
+            <Button className={classes.button}>
+              <div className={classes.iconContainer}>
+                <FontAwesomeIcon className={classes.icon} icon={faEnvelope} size="2x" />
+              </div>
+              Messages
+            </Button>
+          </Grid>
+          <Grid item>
+            <Button className={classes.button}>
+              <div className={classes.iconContainer}>
+                <FontAwesomeIcon className={classes.icon} icon={faBookmark} size="2x" />
+              </div>
+              Bookmarks
+            </Button>
+          </Grid>
+          <Grid item>
+            <Button className={classes.button}>
+              <div className={classes.iconContainer}>
+                <FontAwesomeIcon className={classes.icon} icon={faFileAlt} size="2x" />
+              </div>
+              Lists
+            </Button>
+          </Grid>
+          <Grid item>
+            <Button className={classes.button}>
+              <div className={classes.iconContainer}>
+                <FontAwesomeIcon className={classes.icon} icon={faUserCircle} size="2x" />
+              </div>
+              Profile
+            </Button>
+          </Grid>
+          <Grid item>
+            <Button className={classes.button}>
+              <div className={classes.iconContainer}>
+                <FontAwesomeIcon className={classes.icon} icon={faEllipsisV} size="2x" />
+              </div>
+              More
+            </Button>
+          </Grid>
+          <Grid item>
+            <Button className={classes.button} style={{ justifyContent: 'center' }}>
+              Tweet
+            </Button>
+          </Grid>
+          <Button className={classes.button}>
+            <Grid item container alignContent="center" justify="center" xs={12}>
+              <Grid className={classes.avatar} item xs="auto">
+                <Avatar>OP</Avatar>
+              </Grid>
+              <Grid item container justify="center" alignContent="center" xs={8}>
+                <span>User Name</span>
+              </Grid>
+            </Grid>
+          </Button>
+        </Container>
+      </Grid>
     </Paper>
   );
 };
