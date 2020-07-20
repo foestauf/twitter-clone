@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import 'firebase/auth';
-import 'firebase/database';
+// import 'firebase/database';
 import 'firebase/firestore';
 import { Provider } from 'react-redux';
 import { actionTypes, firebaseReducer, ReactReduxFirebaseProvider } from 'react-redux-firebase';
