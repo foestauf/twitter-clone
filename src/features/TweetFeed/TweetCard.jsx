@@ -4,7 +4,8 @@ import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 
-const TweetCard = () => {
+const TweetCard = (props) => {
+  const { body } = props;
   return (
     <Paper style={{ display: 'flex' }}>
       <Grid
@@ -19,7 +20,7 @@ const TweetCard = () => {
       </Grid>
       <Grid item container direction="column" xs={10} spacing={1}>
         <Grid item>TWEETER INFO</Grid>
-        <Grid item>Main Content Window</Grid>
+        <Grid item>{body}</Grid>
         <Grid item container justify="center">
           <Button>Comment</Button>
           <Button>Retweet</Button>

@@ -15,8 +15,8 @@ import makeStyles from '@material-ui/core/styles/makeStyles';
 import NavMenu from './features/NavMenu/NavMenu';
 import TweetFeed from './features/TweetFeed/TweetFeed';
 import NewTweet from './features/TweetFeed/NewTweet';
-import SignOn from './features/SignOn/SignOn';
 import Profile from './features/Profile/Profile';
+import { UserIsAuthenticated } from './features/PrivateRoute/isAuthenticated';
 
 const useStyles = makeStyles({
   container: {
@@ -49,7 +49,7 @@ export const Home = () => {
                 </div>
                 <Switch>
                   <Route exact path="/" component={TweetFeed} />
-                  <Route exact path="/profile" component={Profile} />
+                  <Route path="/profile" component={UserIsAuthenticated(Profile)} />
                   <NewTweet />
                 </Switch>
               </Container>
@@ -72,7 +72,6 @@ export const Home = () => {
                   />
                 </FormControl>
               </Container>
-              <SignOn />
             </Paper>
           </Grid>
         </Grid>

@@ -1,15 +1,22 @@
 import React from 'react';
 import './App.css';
 import 'firebase/auth';
-// import 'firebase/database';
 import 'firebase/firestore';
-import { Provider } from 'react-redux';
-import { actionTypes, firebaseReducer, ReactReduxFirebaseProvider } from 'react-redux-firebase';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Provider, useSelector } from 'react-redux';
+import {
+  actionTypes,
+  firebaseReducer,
+  isLoaded,
+  ReactReduxFirebaseProvider,
+} from 'react-redux-firebase';
 import * as firebase from 'firebase/app';
 import { createFirestoreInstance, firestoreReducer } from 'redux-firestore';
 import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 import todosSlice from './features/todo/todoSlice';
 import { Home } from './Home';
+import SignOn from './features/SignOn/SignOn';
+import { UserIsAuthenticated } from './features/PrivateRoute/isAuthenticated';
 
 const firebaseui = require('firebaseui');
 
@@ -25,13 +32,14 @@ const firebaseConfig = {
 };
 firebase.initializeApp(firebaseConfig);
 export const { auth } = firebase;
-export const db = firebase.database;
+export const db = firebase.firestore();
 export const ui = new firebaseui.auth.AuthUI(firebase.auth());
 
 export const uiConfig = {
   signInFlow: 'popup',
   signInOptions: [firebase.auth.EmailAuthProvider.PROVIDER_ID],
   credentialHelper: 'none',
+  signInSuccessUrl: '/',
   callbacks: {
     signInSuccessWithAuthResult: () => {
       auth()
@@ -39,7 +47,8 @@ export const uiConfig = {
         .then(() => {
           console.log('Storing session token');
         });
-      return false;
+
+      return true;
     },
   },
 };
@@ -71,10 +80,23 @@ function App() {
         dispatch={store.dispatch}
         createFirestoreInstance={createFirestoreInstance}
       >
-        <Home />
+        <AuthIsLoaded>
+          <Router>
+            <Switch>
+              <Route component={SignOn} exact path="/login" />
+              <Route exact path="/" component={UserIsAuthenticated(Home)} />
+            </Switch>
+          </Router>
+        </AuthIsLoaded>
       </ReactReduxFirebaseProvider>
     </Provider>
   );
+}
+
+function AuthIsLoaded({ children }) {
+  const authData = useSelector((state) => state.firebase.auth);
+  if (!isLoaded(authData)) return <div>Spinning up the hamster wheels...</div>;
+  return children;
 }
 
 export default App;
