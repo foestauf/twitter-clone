@@ -8,7 +8,7 @@ const TweetFeed = () => {
 
   useEffect(() => {
     feedWatcher();
-  });
+  }, []);
 
   const feedWatcher = () => {
     db.collection('tweets')
@@ -26,7 +26,7 @@ const TweetFeed = () => {
     <div>
       <NewTweet />
       {feed.map((value, index) => {
-        return <TweetCard key={index} body={value.tweetText} />;
+        return <TweetCard key={index} tweetOwner={value.tweetOwner} body={value.tweetText} />;
       })}
     </div>
   );

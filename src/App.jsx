@@ -1,8 +1,9 @@
 import React from 'react';
 import './App.css';
 import 'firebase/auth';
+import 'firebase/database';
 import 'firebase/firestore';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import { Provider, useSelector } from 'react-redux';
 import {
   actionTypes,
@@ -36,7 +37,7 @@ export const db = firebase.firestore();
 export const ui = new firebaseui.auth.AuthUI(firebase.auth());
 
 export const uiConfig = {
-  signInFlow: 'popup',
+  signInFlow: 'redirect',
   signInOptions: [firebase.auth.EmailAuthProvider.PROVIDER_ID],
   credentialHelper: 'none',
   signInSuccessUrl: '/',
@@ -67,7 +68,9 @@ const store = configureStore({
 });
 const rrfConfig = {
   userProfile: 'users',
-  useFirestoreForProfile: true, // Store in Firestore instead of Real Time DB
+  useFirestoreForProfile: true, // Store in Firestore instead of Real Time DB,
+  // presence: 'presence',
+  // sessions: 'sessions',
   enableLogging: false,
 };
 
@@ -85,6 +88,7 @@ function App() {
             <Switch>
               <Route component={SignOn} exact path="/login" />
               <Route exact path="/" component={UserIsAuthenticated(Home)} />
+              <Route render={() => <Redirect to={{ pathname: '/login' }} />} />
             </Switch>
           </Router>
         </AuthIsLoaded>

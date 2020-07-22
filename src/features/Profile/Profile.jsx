@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import { auth } from 'firebase';
 import Button from '@material-ui/core/Button';
 import createHistory from 'history/createBrowserHistory';
+import UpdateProfilePage from './UpdateProfile';
 
 const browserHistory = createHistory();
 
@@ -78,6 +79,7 @@ const Profile = () => {
           </Button>
         </Grid>
       </Grid>
+      <UpdateProfilePage />
     </div>
   );
 };
