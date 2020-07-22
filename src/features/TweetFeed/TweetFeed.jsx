@@ -19,7 +19,6 @@ const TweetFeed = () => {
           cities.push(doc.data());
         });
         setFeed(cities);
-        console.log('Current cities in CA: ', cities.join(', '));
       });
   };
   return (
