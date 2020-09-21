@@ -4,6 +4,10 @@ import TextField from '@material-ui/core/TextField';
 import { useSelector } from 'react-redux';
 import { auth } from 'firebase';
 import Button from '@material-ui/core/Button';
+import createHistory from 'history/createBrowserHistory';
+import UpdateProfilePage from './UpdateProfile';
+
+const browserHistory = createHistory();
 
 const Profile = () => {
   const { displayName } = useSelector((state) => state.firebase.auth);
@@ -30,6 +34,17 @@ const Profile = () => {
         console.log(error);
       });
   };
+
+  const signOUtUser = () => {
+    auth()
+      .signOut()
+      .then(() => {
+        browserHistory.replace('/login');
+        console.log('Goodbye');
+      })
+      .catch((err) => console.log(err));
+  };
+
   return (
     <div>
       <Grid container spacing={3} alignContent="center">
@@ -59,8 +74,12 @@ const Profile = () => {
           <Button variant="outlined" color="primary" onClick={updateUser}>
             Save
           </Button>
+          <Button color="secondary" variant="outlined" onClick={signOUtUser}>
+            Sign Out
+          </Button>
         </Grid>
       </Grid>
+      <UpdateProfilePage />
     </div>
   );
 };
