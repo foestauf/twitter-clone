@@ -53,7 +53,9 @@ const NewTweet = () => {
               </Button>
             </Grid>
             <Grid item xs={2}>
-              <Button>TWEET</Button>
+              <Button variant="contained" color="primary">
+                TWEET
+              </Button>
             </Grid>
           </Grid>
         </Grid>
